@@ -22,6 +22,7 @@ public:
 
 		results.strikes = CheckStrike(guessNumber);
 		if (results.strikes < 3) results.solved = false;
+		results.balls = CheckBall(guessNumber);
 		return results;
 	}
 
@@ -35,12 +36,18 @@ public:
 	}
 
 	int CheckBall(const string& guessNumber) {
+		int pos1 = 0;
+		int returnValue = 0;
 		for (char ch : guessNumber) {
-			size_t pos = question.find(ch);
-			if (pos != std::string::npos) {
-
+			size_t pos2 = question.find(ch);
+			if (pos2 != std::string::npos && pos1 != pos2) {
+				returnValue++;
 			}
+
+			pos1++;
 		}
+
+		return returnValue;
 	}
 
 
